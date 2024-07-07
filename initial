@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cashflow Velocity Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .calculator {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        .calculator input, .calculator button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .calculator button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Cashflow Velocity Calculator</h2>
+        <label for="contacts">Change in Contacts:</label>
+        <input type="number" id="contacts" placeholder="Enter the number of contacts">
+        
+        <label for="value">Value per Deal ($):</label>
+        <input type="number" id="value" placeholder="Enter the value per deal">
+        
+        <label for="leadConversionRate">Lead Conversion Rate (%):</label>
+        <input type="number" id="leadConversionRate" placeholder="Enter the lead conversion rate">
+        
+        <label for="salesConversionRate">Sales Conversion Rate (%):</label>
+        <input type="number" id="salesConversionRate" placeholder="Enter the sales conversion rate">
+        
+        <button onclick="calculateProfits()">Calculate Profits</button>
+        
+        <div class="output" id="output"></div>
+    </div>
+
+    <script>
+        function calculateProfits() {
+            const contacts = document.getElementById('contacts').value;
+            const value = document.getElementById('value').value;
+            const leadConversionRate = document.getElementById('leadConversionRate').value;
+            const salesConversionRate = document.getElementById('salesConversionRate').value;
+            
+            if (!contacts || !value || !leadConversionRate || !salesConversionRate) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            const leads = contacts * (leadConversionRate / 100);
+            const sales = leads * (salesConversionRate / 100);
+            const profits = sales * value;
+            
+            document.getElementById('output').innerHTML = `
+                <p>Number of Leads: ${leads.toFixed(2)}</p>
+                <p>Number of Sales: ${sales.toFixed(2)}</p>
+                <p>Profits: $${profits.toFixed(2)}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
